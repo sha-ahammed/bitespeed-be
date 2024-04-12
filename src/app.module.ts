@@ -3,16 +3,37 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { IdentifyModule } from './identify/identify.module';
+import * as dotenv from 'dotenv';
 
+interface Credentials {
+  host: string;
+  username: string;
+  password: string;
+  database: string;
+}
+
+const parsed = dotenv.config().parsed;
+if (
+  !parsed ||
+  !parsed.host ||
+  !parsed.username ||
+  !parsed.password ||
+  !parsed.database
+) {
+  throw new Error(
+    'Database credentials are not defined in the environment variables',
+  );
+}
+const credentials: Credentials = parsed as unknown as Credentials;
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres', // or 'mysql', 'mariadb', 'sqlite', etc.
-      host: 'dpg-cock0v0l6cac73f0t2og-a.singapore-postgres.render.com',
+      host: credentials['host'],
       port: 5432,
-      username: 'bitespeed_pg_user',
-      password: 'XnTf1xN4TlwSGprRwpcGkGRAooHswW3m',
-      database: 'bitespeed_pg',
+      username: credentials['username'],
+      password: credentials['password'],
+      database: credentials['database'],
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       ssl: true,
