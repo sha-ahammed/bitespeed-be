@@ -1,4 +1,4 @@
 export class CustomerContactDetailsRequest {
-  email?: string;
-  phoneNumber?: string;
+  email!: string | null;
+  phoneNumber!: string | null;
 }

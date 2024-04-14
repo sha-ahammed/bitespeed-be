@@ -17,14 +17,14 @@ export class Contact {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  phoneNumber!: string;
+  @Column({ nullable: true, type: 'varchar' })
+  phoneNumber!: string | null;
 
-  @Column()
-  email!: string;
+  @Column({ nullable: true, type: 'varchar' })
+  email!: string | null;
 
-  @Column({ nullable: true })
-  linkedId!: number;
+  @Column({ nullable: true, type: 'integer' })
+  linkedId!: number | null;
 
   @Column({
     type: 'enum',

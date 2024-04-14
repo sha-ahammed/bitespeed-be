@@ -7,7 +7,11 @@ export class IdentifyController {
   constructor(private readonly identifyService: IdentifyService) {}
 
   @Post()
-  getCustomerContactDetails(@Body() request: CustomerContactDetailsRequest) {
-    return this.identifyService.getCustomerContactDetails(request);
+  async getCustomerContactDetails(
+    @Body() request: CustomerContactDetailsRequest,
+  ) {
+    const response =
+      await this.identifyService.getCustomerContactDetails(request);
+    return response;
   }
 }
