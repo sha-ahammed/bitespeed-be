@@ -16,7 +16,7 @@ const parsed = {
   host: process.env.host,
   username: process.env.username,
   password: process.env.password,
-  database: process.env.password,
+  database: process.env.database,
 };
 if (
   !parsed ||
