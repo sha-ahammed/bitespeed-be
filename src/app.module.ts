@@ -12,7 +12,12 @@ interface Credentials {
   database: string;
 }
 
-const parsed = dotenv.config().parsed;
+const parsed = {
+  host: process.env.host,
+  username: process.env.username,
+  password: process.env.password,
+  database: process.env.password,
+};
 if (
   !parsed ||
   !parsed.host ||
